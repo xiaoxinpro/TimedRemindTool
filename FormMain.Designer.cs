@@ -31,6 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.groupBoxAddTimed = new System.Windows.Forms.GroupBox();
+            this.comboBoxLoop = new System.Windows.Forms.ComboBox();
+            this.textBoxMark = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.radioButtonTimed = new System.Windows.Forms.RadioButton();
+            this.radioButtonTimekeep = new System.Windows.Forms.RadioButton();
+            this.dateTimeCtrl = new System.Windows.Forms.DateTimePicker();
             this.groupBoxTimdeLIst = new System.Windows.Forms.GroupBox();
             this.listViewTimed = new System.Windows.Forms.ListView();
             this.notifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -38,14 +46,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIconCtrl = new System.Windows.Forms.NotifyIcon(this.components);
-            this.dateTimeCtrl = new System.Windows.Forms.DateTimePicker();
-            this.radioButtonTimekeep = new System.Windows.Forms.RadioButton();
-            this.radioButtonTimed = new System.Windows.Forms.RadioButton();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxMark = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxLoop = new System.Windows.Forms.ComboBox();
+            this.timerListView = new System.Windows.Forms.Timer(this.components);
             this.groupBoxAddTimed.SuspendLayout();
             this.groupBoxTimdeLIst.SuspendLayout();
             this.notifyContextMenu.SuspendLayout();
@@ -69,6 +70,93 @@
             this.groupBoxAddTimed.TabIndex = 0;
             this.groupBoxAddTimed.TabStop = false;
             this.groupBoxAddTimed.Text = "添加定时";
+            // 
+            // comboBoxLoop
+            // 
+            this.comboBoxLoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLoop.FormattingEnabled = true;
+            this.comboBoxLoop.Items.AddRange(new object[] {
+            "单次运行",
+            "周期运行"});
+            this.comboBoxLoop.Location = new System.Drawing.Point(187, 19);
+            this.comboBoxLoop.Name = "comboBoxLoop";
+            this.comboBoxLoop.Size = new System.Drawing.Size(133, 20);
+            this.comboBoxLoop.TabIndex = 6;
+            // 
+            // textBoxMark
+            // 
+            this.textBoxMark.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.textBoxMark.Location = new System.Drawing.Point(187, 42);
+            this.textBoxMark.Name = "textBoxMark";
+            this.textBoxMark.Size = new System.Drawing.Size(133, 23);
+            this.textBoxMark.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(150, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "条件：";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(150, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "备注：";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonAdd.Location = new System.Drawing.Point(348, 19);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(96, 46);
+            this.buttonAdd.TabIndex = 3;
+            this.buttonAdd.Text = "添加";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // radioButtonTimed
+            // 
+            this.radioButtonTimed.AutoSize = true;
+            this.radioButtonTimed.Location = new System.Drawing.Point(72, 20);
+            this.radioButtonTimed.Name = "radioButtonTimed";
+            this.radioButtonTimed.Size = new System.Drawing.Size(47, 16);
+            this.radioButtonTimed.TabIndex = 2;
+            this.radioButtonTimed.Tag = "1";
+            this.radioButtonTimed.Text = "时间";
+            this.radioButtonTimed.UseVisualStyleBackColor = true;
+            this.radioButtonTimed.CheckedChanged += new System.EventHandler(this.radioButtonTimedMode_CheckedChanged);
+            // 
+            // radioButtonTimekeep
+            // 
+            this.radioButtonTimekeep.AutoSize = true;
+            this.radioButtonTimekeep.Checked = true;
+            this.radioButtonTimekeep.Location = new System.Drawing.Point(19, 20);
+            this.radioButtonTimekeep.Name = "radioButtonTimekeep";
+            this.radioButtonTimekeep.Size = new System.Drawing.Size(47, 16);
+            this.radioButtonTimekeep.TabIndex = 2;
+            this.radioButtonTimekeep.TabStop = true;
+            this.radioButtonTimekeep.Tag = "0";
+            this.radioButtonTimekeep.Text = "计时";
+            this.radioButtonTimekeep.UseVisualStyleBackColor = true;
+            this.radioButtonTimekeep.CheckedChanged += new System.EventHandler(this.radioButtonTimedMode_CheckedChanged);
+            // 
+            // dateTimeCtrl
+            // 
+            this.dateTimeCtrl.CustomFormat = "HH:dd";
+            this.dateTimeCtrl.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.dateTimeCtrl.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimeCtrl.Location = new System.Drawing.Point(19, 42);
+            this.dateTimeCtrl.Name = "dateTimeCtrl";
+            this.dateTimeCtrl.ShowUpDown = true;
+            this.dateTimeCtrl.Size = new System.Drawing.Size(100, 23);
+            this.dateTimeCtrl.TabIndex = 1;
+            this.dateTimeCtrl.Value = new System.DateTime(2020, 5, 22, 1, 0, 0, 0);
             // 
             // groupBoxTimdeLIst
             // 
@@ -128,89 +216,11 @@
             this.notifyIconCtrl.Text = "notifyIconCtrl";
             this.notifyIconCtrl.Visible = true;
             // 
-            // dateTimeCtrl
+            // timerListView
             // 
-            this.dateTimeCtrl.CustomFormat = "HH:dd";
-            this.dateTimeCtrl.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.dateTimeCtrl.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimeCtrl.Location = new System.Drawing.Point(19, 42);
-            this.dateTimeCtrl.Name = "dateTimeCtrl";
-            this.dateTimeCtrl.ShowUpDown = true;
-            this.dateTimeCtrl.Size = new System.Drawing.Size(100, 23);
-            this.dateTimeCtrl.TabIndex = 1;
-            this.dateTimeCtrl.Value = new System.DateTime(2020, 5, 22, 1, 0, 0, 0);
-            // 
-            // radioButtonTimekeep
-            // 
-            this.radioButtonTimekeep.AutoSize = true;
-            this.radioButtonTimekeep.Checked = true;
-            this.radioButtonTimekeep.Location = new System.Drawing.Point(19, 20);
-            this.radioButtonTimekeep.Name = "radioButtonTimekeep";
-            this.radioButtonTimekeep.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonTimekeep.TabIndex = 2;
-            this.radioButtonTimekeep.TabStop = true;
-            this.radioButtonTimekeep.Tag = "0";
-            this.radioButtonTimekeep.Text = "计时";
-            this.radioButtonTimekeep.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonTimed
-            // 
-            this.radioButtonTimed.AutoSize = true;
-            this.radioButtonTimed.Location = new System.Drawing.Point(72, 20);
-            this.radioButtonTimed.Name = "radioButtonTimed";
-            this.radioButtonTimed.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonTimed.TabIndex = 2;
-            this.radioButtonTimed.Tag = "1";
-            this.radioButtonTimed.Text = "时间";
-            this.radioButtonTimed.UseVisualStyleBackColor = true;
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonAdd.Location = new System.Drawing.Point(348, 19);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(96, 46);
-            this.buttonAdd.TabIndex = 3;
-            this.buttonAdd.Text = "添加";
-            this.buttonAdd.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(150, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "备注：";
-            // 
-            // textBoxMark
-            // 
-            this.textBoxMark.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.textBoxMark.Location = new System.Drawing.Point(187, 42);
-            this.textBoxMark.Name = "textBoxMark";
-            this.textBoxMark.Size = new System.Drawing.Size(133, 23);
-            this.textBoxMark.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(150, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "条件：";
-            // 
-            // comboBoxLoop
-            // 
-            this.comboBoxLoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxLoop.FormattingEnabled = true;
-            this.comboBoxLoop.Items.AddRange(new object[] {
-            "单次运行",
-            "周期运行"});
-            this.comboBoxLoop.Location = new System.Drawing.Point(187, 19);
-            this.comboBoxLoop.Name = "comboBoxLoop";
-            this.comboBoxLoop.Size = new System.Drawing.Size(133, 20);
-            this.comboBoxLoop.TabIndex = 6;
+            this.timerListView.Enabled = true;
+            this.timerListView.Interval = 1000;
+            this.timerListView.Tick += new System.EventHandler(this.timerListView_Tick);
             // 
             // FormMain
             // 
@@ -225,6 +235,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "定时提醒工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBoxAddTimed.ResumeLayout(false);
             this.groupBoxAddTimed.PerformLayout();
@@ -252,6 +263,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.RadioButton radioButtonTimed;
         private System.Windows.Forms.RadioButton radioButtonTimekeep;
+        private System.Windows.Forms.Timer timerListView;
     }
 }
 
