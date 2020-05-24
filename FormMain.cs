@@ -156,7 +156,7 @@ namespace TimedRemindTool
         
         private void radioButtonTimedMode_CheckedChanged(object sender, EventArgs e)
         {
-            TimedMode = (TimedRemind.EnmuTimedMode)((RadioButton)sender).Tag;
+            TimedMode = (TimedRemind.EnmuTimedMode)Convert.ToInt32(((RadioButton)sender).Tag);
         }
 
         private void timerListView_Tick(object sender, EventArgs e)
