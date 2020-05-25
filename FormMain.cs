@@ -49,9 +49,7 @@ namespace TimedRemindTool
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
-                this.Hide();
-                this.ShowInTaskbar = false;
-                this.notifyIconCtrl.Visible = true;
+                HideForm(this.notifyIconCtrl);
             }
         }
 
@@ -62,13 +60,9 @@ namespace TimedRemindTool
         /// <param name="e"></param>
         private void notifyIconCtrl_DoubleClick(object sender, EventArgs e)
         {
-            NotifyIcon notifyIcon = (NotifyIcon)sender;
             if (this.WindowState == FormWindowState.Minimized)
             {
-                this.Show();
-                this.WindowState = FormWindowState.Normal;
-                notifyIcon.Visible = false;
-                this.ShowInTaskbar = true;
+                ShowForm((NotifyIcon)sender);
             }
         }
 
@@ -147,6 +141,39 @@ namespace TimedRemindTool
         }
         #endregion
 
+        #region 公共函数
+        /// <summary>
+        /// 显示窗体
+        /// </summary>
+        /// <param name="notifyIcon"></param>
+        public void ShowForm(NotifyIcon notifyIcon)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon.Visible = false;
+            this.ShowInTaskbar = true;
+        }
+
+        /// <summary>
+        /// 隐藏窗体到最小化托盘
+        /// </summary>
+        /// <param name="notifyIcon"></param>
+        public void HideForm(NotifyIcon notifyIcon)
+        {
+            this.Hide();
+            this.ShowInTaskbar = false;
+            notifyIcon.Visible = true;
+        }
+
+        #endregion
+
+        #region 定时列表处理
+
+        /// <summary>
+        /// 添加定时到列表中
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="tr"></param>
         void AddListViewTimed(ListView listView, TimedRemind tr)
         {
             DateTime over = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
@@ -169,7 +196,7 @@ namespace TimedRemindTool
                     listViewItem.SubItems.Add("单次运行");
                     break;
                 case TimedRemind.EnmuTimeLoop.More:
-                    listViewItem.SubItems.Add("无限循环");
+                    listViewItem.SubItems.Add("周期运行");
                     break;
                 default:
                     listViewItem.SubItems.Add("未知");
@@ -178,8 +205,9 @@ namespace TimedRemindTool
             listViewItem.SubItems.Add(tr.Mark);
             listView.Items.Add(listViewItem);
         }
+        #endregion
 
-        #region 控制事件
+        #region 控件事件
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             listTimedRemind.Add(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
@@ -238,7 +266,10 @@ namespace TimedRemindTool
             TimedRemind tm = (TimedRemind)sender;
             this.Invoke(new Action(() =>
             {
+                ShowForm(this.notifyIconCtrl);
+                this.TopMost = true;
                 MessageBox.Show(tm.Mark, "定时提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.TopMost = false;
             }));
         }
 
