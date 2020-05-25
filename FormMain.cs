@@ -212,8 +212,14 @@ namespace TimedRemindTool
         {
             listTimedRemind.Add(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
             listTimedRemind[listTimedRemind.Count - 1].BindTimedDone(TimedRemindDone);
-            listTimedRemind[listTimedRemind.Count - 1].Start();
-            AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
+            if (listTimedRemind[listTimedRemind.Count - 1].Start())
+            {
+                AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
+            }
+            else
+            {
+                listTimedRemind.RemoveAt(listTimedRemind.Count - 1);
+            }
         }
 
         
