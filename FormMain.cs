@@ -267,9 +267,11 @@ namespace TimedRemindTool
             this.Invoke(new Action(() =>
             {
                 ShowForm(this.notifyIconCtrl);
-                this.TopMost = true;
-                MessageBox.Show(tm.Mark, "定时提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.TopMost = false;
+                Form formMessage = new FormRemind(tm.Mark);
+                formMessage.Show();
+                //this.TopMost = true;
+                //MessageBox.Show(tm.Mark, "定时提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //this.TopMost = false;
             }));
         }
 
