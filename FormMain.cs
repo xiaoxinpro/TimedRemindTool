@@ -12,8 +12,9 @@ namespace TimedRemindTool
     public partial class FormMain : Form
     {
         #region//创建对象及声明变量
-        List<TimedRemind> listTimedRemind = new List<TimedRemind>();
-        TimedRemind.EnmuTimedMode TimedMode = TimedRemind.EnmuTimedMode.Timekeep;
+        private List<TimedRemind> listTimedRemind = new List<TimedRemind>();
+        private TimedRemind.EnmuTimedMode TimedMode = TimedRemind.EnmuTimedMode.Timekeep;
+        private DateTime BakTimedValue;
         #endregion
 
         #region 窗体事件
@@ -68,6 +69,7 @@ namespace TimedRemindTool
 
             DateTime dt = DateTime.Now;
             dateTimeCtrl.Value = new DateTime(dt.Year, dt.Month, dt.Day, 1, 0, 0);
+            BakTimedValue = dateTimeCtrl.Value;
         }
 
         /// <summary>
@@ -153,10 +155,29 @@ namespace TimedRemindTool
             listTimedRemind[listTimedRemind.Count - 1].Start();
             AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
         }
+
         
         private void radioButtonTimedMode_CheckedChanged(object sender, EventArgs e)
         {
-            TimedMode = (TimedRemind.EnmuTimedMode)Convert.ToInt32(((RadioButton)sender).Tag);
+            RadioButton rb = (RadioButton)sender;
+            if (rb.Checked)
+            {
+                TimedMode = (TimedRemind.EnmuTimedMode)Convert.ToInt32(rb.Tag);
+                switch (TimedMode)
+                {
+                    case TimedRemind.EnmuTimedMode.Timekeep:
+                        dateTimeCtrl.Value = BakTimedValue;
+                        break;
+                    case TimedRemind.EnmuTimedMode.Timed:
+                        BakTimedValue = dateTimeCtrl.Value;
+                        dateTimeCtrl.Value = DateTime.Now.AddHours(1);
+                        break;
+                    default:
+                        BakTimedValue = dateTimeCtrl.Value;
+                        break;
+                }
+            }
+
         }
 
         private void timerListView_Tick(object sender, EventArgs e)
