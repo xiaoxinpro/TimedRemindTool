@@ -41,6 +41,38 @@ namespace TimedRemindTool
         }
 
         /// <summary>
+        /// 窗体调整大小事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                this.ShowInTaskbar = false;
+                this.notifyIconCtrl.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// 双击托盘图标事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void notifyIconCtrl_DoubleClick(object sender, EventArgs e)
+        {
+            NotifyIcon notifyIcon = (NotifyIcon)sender;
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+                notifyIcon.Visible = false;
+                this.ShowInTaskbar = true;
+            }
+        }
+
+        /// <summary>
         /// 关闭窗体事件
         /// </summary>
         /// <param name="sender"></param>
@@ -209,6 +241,7 @@ namespace TimedRemindTool
                 MessageBox.Show(tm.Mark, "定时提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }));
         }
+
         #endregion
 
     }

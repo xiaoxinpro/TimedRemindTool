@@ -128,7 +128,7 @@
             this.radioButtonTimed.Size = new System.Drawing.Size(47, 16);
             this.radioButtonTimed.TabIndex = 2;
             this.radioButtonTimed.Tag = "1";
-            this.radioButtonTimed.Text = "时间";
+            this.radioButtonTimed.Text = "闹钟";
             this.radioButtonTimed.UseVisualStyleBackColor = true;
             this.radioButtonTimed.CheckedChanged += new System.EventHandler(this.radioButtonTimedMode_CheckedChanged);
             // 
@@ -215,6 +215,7 @@
             this.notifyIconCtrl.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconCtrl.Icon")));
             this.notifyIconCtrl.Text = "notifyIconCtrl";
             this.notifyIconCtrl.Visible = true;
+            this.notifyIconCtrl.DoubleClick += new System.EventHandler(this.notifyIconCtrl_DoubleClick);
             // 
             // timerListView
             // 
@@ -237,6 +238,7 @@
             this.Text = "定时提醒工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.groupBoxAddTimed.ResumeLayout(false);
             this.groupBoxAddTimed.PerformLayout();
             this.groupBoxTimdeLIst.ResumeLayout(false);
