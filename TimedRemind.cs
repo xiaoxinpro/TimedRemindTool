@@ -44,9 +44,9 @@ namespace TimedRemindTool
 
         public bool Start()
         {
-            int delay = TimeDate.Second + TimeDate.Minute * 60 + TimeDate.Hour * 3600;
+            int delayTime = TimeDate.Second + TimeDate.Minute * 60 + TimeDate.Hour * 3600;
             Status = EnmuTimedStatus.Ready;
-            if (delay <= 0)
+            if (delayTime <= 0)
             {
                 return false;
             }
@@ -54,15 +54,16 @@ namespace TimedRemindTool
             {
                 while (true)
                 {
+                    int delay = delayTime;
                     StartTime = DateTime.Now;
                     EndTime = StartTime.AddSeconds(delay);
                     while (delay-- > 0)
                     {
-                        Thread.Sleep(1000);
                         if (Status == EnmuTimedStatus.Done)
                         {
                             return;
                         }
+                        Thread.Sleep(1000);
                     }
                     if (TimeLoop == EnmuTimeLoop.One)
                     {
