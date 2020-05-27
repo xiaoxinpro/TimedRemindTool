@@ -170,7 +170,7 @@ namespace TimedRemindTool
         #region 定时列表处理
 
         /// <summary>
-        /// 获取剩余事件
+        /// 获取定时剩余时间
         /// </summary>
         /// <param name="tr"></param>
         /// <returns></returns>
@@ -228,15 +228,79 @@ namespace TimedRemindTool
             listView.Items.Add(listViewItem);
         }
 
+        /// <summary>
+        /// 更新现有列表中的数据
+        /// </summary>
+        /// <param name="listViewItem"></param>
+        /// <param name="tr"></param>
+        private void UpdataListViewItem(ListViewItem listViewItem, TimedRemind tr)
+        {
+            listViewItem.SubItems[1].Text = (tr.StartTime.ToString("HH:mm:ss"));
+            listViewItem.SubItems[2].Text = (tr.EndTime.ToString("HH:mm:ss"));
+            listViewItem.SubItems[3].Text = (GetOverTime(tr).ToString("HH:mm:ss"));
+            listViewItem.SubItems[4].Text = (GetTimeLoopName(tr));
+            listViewItem.SubItems[5].Text = (tr.Mark);
+        }
+
+        /// <summary>
+        /// 更新定时列表数据
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="trs"></param>
+        private void UpdataListView(ListView listView, List<TimedRemind> trs)
+        {
+            listView.BeginUpdate();
+            if (listView.Items.Count == trs.Count)
+            {
+                for (int i = 0; i < trs.Count; i++)
+                {
+                    if (trs[i].Status == TimedRemind.EnmuTimedStatus.Done)
+                    {
+                        trs.RemoveAt(i);
+                        listView.Items.RemoveAt(i);
+                    }
+                    else
+                    {
+                        UpdataListViewItem(listView.Items[i], trs[i]);
+                    }
+                }
+            }
+            else
+            {
+                listView.Items.Clear();
+                for (int i = 0; i < trs.Count; i++)
+                {
+                    if (trs[i].Status == TimedRemind.EnmuTimedStatus.Done)
+                    {
+                        trs.RemoveAt(i);
+                    }
+                    else
+                    {
+                        AddListViewTimed(listView, trs[i]);
+                    }
+                }
+            }
+            listView.EndUpdate();
+        }
+
         #endregion
 
         #region 控件事件
+        /// <summary>
+        /// 添加按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddTimedRemind(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
         }
 
-        
+        /// <summary>
+        /// 定时模式切换事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioButtonTimedMode_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rb = (RadioButton)sender;
@@ -260,24 +324,21 @@ namespace TimedRemindTool
 
         }
 
+        /// <summary>
+        /// 定时器中断函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerListView_Tick(object sender, EventArgs e)
         {
-            listViewTimed.BeginUpdate();
-            listViewTimed.Items.Clear();
-            for (int i = 0; i < listTimedRemind.Count; i++)
-            {
-                if (listTimedRemind[i].Status == TimedRemind.EnmuTimedStatus.Done)
-                {
-                    listTimedRemind.RemoveAt(i);
-                }
-                else
-                {
-                    AddListViewTimed(listViewTimed, listTimedRemind[i]);
-                }
-            }
-            listViewTimed.EndUpdate();
+            UpdataListView(listViewTimed, listTimedRemind);
         }
 
+        /// <summary>
+        /// 列表双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listViewTimed_DoubleClick(object sender, EventArgs e)
         {
             ListView listView = (ListView)sender;

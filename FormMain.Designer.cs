@@ -123,6 +123,7 @@
             // radioButtonTimed
             // 
             this.radioButtonTimed.AutoSize = true;
+            this.radioButtonTimed.Enabled = false;
             this.radioButtonTimed.Location = new System.Drawing.Point(72, 20);
             this.radioButtonTimed.Name = "radioButtonTimed";
             this.radioButtonTimed.Size = new System.Drawing.Size(47, 16);
@@ -221,7 +222,6 @@
             // timerListView
             // 
             this.timerListView.Enabled = true;
-            this.timerListView.Interval = 1000;
             this.timerListView.Tick += new System.EventHandler(this.timerListView_Tick);
             // 
             // FormMain
