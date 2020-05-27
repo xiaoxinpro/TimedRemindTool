@@ -210,16 +210,7 @@ namespace TimedRemindTool
         #region 控件事件
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            listTimedRemind.Add(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
-            listTimedRemind[listTimedRemind.Count - 1].BindTimedDone(TimedRemindDone);
-            if (listTimedRemind[listTimedRemind.Count - 1].Start())
-            {
-                AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
-            }
-            else
-            {
-                listTimedRemind.RemoveAt(listTimedRemind.Count - 1);
-            }
+            AddTimedRemind(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
         }
 
         
@@ -250,7 +241,6 @@ namespace TimedRemindTool
         {
             listViewTimed.BeginUpdate();
             listViewTimed.Items.Clear();
-
             for (int i = 0; i < listTimedRemind.Count; i++)
             {
                 if (listTimedRemind[i].Status == TimedRemind.EnmuTimedStatus.Done)
@@ -264,10 +254,44 @@ namespace TimedRemindTool
             }
             listViewTimed.EndUpdate();
         }
+
+        private void listViewTimed_DoubleClick(object sender, EventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            if (listView.SelectedItems.Count == 1)
+            {
+                RemoveTimedTemind(listView.SelectedItems[0].Index);
+            }
+        }
+        #endregion
+
+        #region 定时相关函数
+        private void AddTimedRemind(TimedRemind tr)
+        {
+            listTimedRemind.Add(tr);
+            listTimedRemind[listTimedRemind.Count - 1].BindTimedDone(TimedRemindDone);
+            if (listTimedRemind[listTimedRemind.Count - 1].Start())
+            {
+                AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
+            }
+            else
+            {
+                listTimedRemind.RemoveAt(listTimedRemind.Count - 1);
+            }
+        }
+
+        private void RemoveTimedTemind(int index)
+        {
+            if (index < listTimedRemind.Count)
+            {
+                listTimedRemind[index].Stop();
+                listTimedRemind.RemoveAt(index);
+            }
+        }
         #endregion
 
         #region 定时事件
-        void TimedRemindDone(object sender)
+        private void TimedRemindDone(object sender)
         {
             TimedRemind tm = (TimedRemind)sender;
             this.Invoke(new Action(() =>
@@ -282,6 +306,7 @@ namespace TimedRemindTool
         }
 
         #endregion
+
 
     }
 }

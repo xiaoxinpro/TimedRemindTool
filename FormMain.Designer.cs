@@ -182,6 +182,7 @@
             this.listViewTimed.Size = new System.Drawing.Size(448, 343);
             this.listViewTimed.TabIndex = 0;
             this.listViewTimed.UseCompatibleStateImageBehavior = false;
+            this.listViewTimed.DoubleClick += new System.EventHandler(this.listViewTimed_DoubleClick);
             // 
             // notifyContextMenu
             // 
