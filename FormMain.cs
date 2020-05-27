@@ -170,11 +170,11 @@ namespace TimedRemindTool
         #region 定时列表处理
 
         /// <summary>
-        /// 添加定时到列表中
+        /// 获取剩余事件
         /// </summary>
-        /// <param name="listView"></param>
         /// <param name="tr"></param>
-        void AddListViewTimed(ListView listView, TimedRemind tr)
+        /// <returns></returns>
+        private DateTime GetOverTime(TimedRemind tr)
         {
             DateTime over = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
             try
@@ -185,26 +185,49 @@ namespace TimedRemindTool
             {
                 Console.WriteLine(err.Message);
             }
+            return over;
+        }
+
+        /// <summary>
+        /// 获取定时循环名称
+        /// </summary>
+        /// <param name="tr"></param>
+        /// <returns></returns>
+        private String GetTimeLoopName(TimedRemind tr)
+        {
+            String name;
+            switch (tr.TimeLoop)
+            {
+                case TimedRemind.EnmuTimeLoop.One:
+                    name = "单次运行";
+                    break;
+                case TimedRemind.EnmuTimeLoop.More:
+                    name = "周期运行";
+                    break;
+                default:
+                    name = "未知";
+                    break;
+            }
+            return name;
+        }
+
+        /// <summary>
+        /// 添加定时到列表中
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="tr"></param>
+        private void AddListViewTimed(ListView listView, TimedRemind tr)
+        {
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.Text = (listView.Items.Count + 1).ToString();
             listViewItem.SubItems.Add(tr.StartTime.ToString("HH:mm:ss"));
             listViewItem.SubItems.Add(tr.EndTime.ToString("HH:mm:ss"));
-            listViewItem.SubItems.Add(over.ToString("HH:mm:ss"));
-            switch (tr.TimeLoop)
-            {
-                case TimedRemind.EnmuTimeLoop.One:
-                    listViewItem.SubItems.Add("单次运行");
-                    break;
-                case TimedRemind.EnmuTimeLoop.More:
-                    listViewItem.SubItems.Add("周期运行");
-                    break;
-                default:
-                    listViewItem.SubItems.Add("未知");
-                    break;
-            }
+            listViewItem.SubItems.Add(GetOverTime(tr).ToString("HH:mm:ss"));
+            listViewItem.SubItems.Add(GetTimeLoopName(tr));
             listViewItem.SubItems.Add(tr.Mark);
             listView.Items.Add(listViewItem);
         }
+
         #endregion
 
         #region 控件事件
