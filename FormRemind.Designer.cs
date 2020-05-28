@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRemind));
             this.labelMessage = new System.Windows.Forms.Label();
             this.timerForm = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -55,6 +56,7 @@
             this.ClientSize = new System.Drawing.Size(404, 141);
             this.Controls.Add(this.labelMessage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormRemind";
