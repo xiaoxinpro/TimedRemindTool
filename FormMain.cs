@@ -235,11 +235,26 @@ namespace TimedRemindTool
         /// <param name="tr"></param>
         private void UpdataListViewItem(ListViewItem listViewItem, TimedRemind tr)
         {
-            listViewItem.SubItems[1].Text = (tr.StartTime.ToString("HH:mm:ss"));
-            listViewItem.SubItems[2].Text = (tr.EndTime.ToString("HH:mm:ss"));
-            listViewItem.SubItems[3].Text = (GetOverTime(tr).ToString("HH:mm:ss"));
-            listViewItem.SubItems[4].Text = (GetTimeLoopName(tr));
-            listViewItem.SubItems[5].Text = (tr.Mark);
+            if (listViewItem.SubItems[1].Text != tr.StartTime.ToString("HH:mm:ss"))
+            {
+                listViewItem.SubItems[1].Text = tr.StartTime.ToString("HH:mm:ss");
+            }
+            if (listViewItem.SubItems[2].Text != tr.EndTime.ToString("HH:mm:ss"))
+            {
+                listViewItem.SubItems[2].Text = tr.EndTime.ToString("HH:mm:ss");
+            }
+            if (listViewItem.SubItems[3].Text != GetOverTime(tr).ToString("HH:mm:ss"))
+            {
+                listViewItem.SubItems[3].Text = GetOverTime(tr).ToString("HH:mm:ss");
+            }
+            if (listViewItem.SubItems[4].Text != GetTimeLoopName(tr))
+            {
+                listViewItem.SubItems[4].Text = GetTimeLoopName(tr);
+            }
+            if (listViewItem.SubItems[5].Text != tr.Mark)
+            {
+                listViewItem.SubItems[5].Text = tr.Mark;
+            }
         }
 
         /// <summary>
@@ -249,7 +264,6 @@ namespace TimedRemindTool
         /// <param name="trs"></param>
         private void UpdataListView(ListView listView, List<TimedRemind> trs)
         {
-            listView.BeginUpdate();
             if (listView.Items.Count == trs.Count)
             {
                 for (int i = 0; i < trs.Count; i++)
@@ -280,7 +294,6 @@ namespace TimedRemindTool
                     }
                 }
             }
-            listView.EndUpdate();
         }
 
         #endregion
