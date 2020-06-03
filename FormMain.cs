@@ -172,6 +172,7 @@ namespace TimedRemindTool
             {
                 tr.Stop();
             }
+            this.Dispose();
         }
 
         #endregion
@@ -369,6 +370,33 @@ namespace TimedRemindTool
                 RemoveTimedTemind(listView.SelectedItems[0].Index);
             }
         }
+
+        /// <summary>
+        /// 托盘菜单 - 打开/隐藏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemOpen_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                ShowForm(notifyIconCtrl);
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+        }
+
+        /// <summary>
+        /// 托盘菜单 - 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemExit_Click(object sender, EventArgs e)
+        {
+            CloseForm();
+        }
         #endregion
 
         #region 定时相关函数
@@ -419,8 +447,8 @@ namespace TimedRemindTool
             }));
         }
 
-        #endregion
 
+        #endregion
 
     }
 }
