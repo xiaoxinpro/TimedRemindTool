@@ -150,7 +150,7 @@ namespace TimedRemindTool
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            notifyIcon.Visible = false;
+            //notifyIcon.Visible = false;
             this.ShowInTaskbar = true;
         }
 
@@ -162,7 +162,7 @@ namespace TimedRemindTool
         {
             this.Hide();
             this.ShowInTaskbar = false;
-            notifyIcon.Visible = true;
+            //notifyIcon.Visible = true;
         }
 
         #endregion
@@ -363,6 +363,10 @@ namespace TimedRemindTool
         #endregion
 
         #region 定时相关函数
+        /// <summary>
+        /// 添加定时
+        /// </summary>
+        /// <param name="tr"></param>
         private void AddTimedRemind(TimedRemind tr)
         {
             listTimedRemind.Add(tr);
@@ -377,6 +381,10 @@ namespace TimedRemindTool
             }
         }
 
+        /// <summary>
+        /// 删除定时
+        /// </summary>
+        /// <param name="index"></param>
         private void RemoveTimedTemind(int index)
         {
             if (index < listTimedRemind.Count)
