@@ -73,11 +73,8 @@ namespace TimedRemindTool
         /// <param name="e"></param>
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            notifyIconCtrl.Visible = false;
-            foreach (TimedRemind tr in listTimedRemind)
-            {
-                tr.Stop();
-            }
+            e.Cancel = true;
+            this.WindowState = FormWindowState.Minimized;
         }
         #endregion
 
@@ -163,6 +160,18 @@ namespace TimedRemindTool
             this.Hide();
             this.ShowInTaskbar = false;
             //notifyIcon.Visible = true;
+        }
+
+        /// <summary>
+        /// 关闭窗体
+        /// </summary>
+        public void CloseForm()
+        {
+            notifyIconCtrl.Visible = false;
+            foreach (TimedRemind tr in listTimedRemind)
+            {
+                tr.Stop();
+            }
         }
 
         #endregion

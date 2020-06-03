@@ -192,23 +192,24 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
             this.notifyContextMenu.Name = "contextMenuStrip1";
-            this.notifyContextMenu.Size = new System.Drawing.Size(101, 54);
+            this.notifyContextMenu.Size = new System.Drawing.Size(181, 76);
             // 
             // toolStripMenuItemOpen
             // 
+            this.toolStripMenuItemOpen.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItemOpen.Text = "打开";
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemOpen.Text = "显示/隐藏";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemExit.Text = "退出";
             // 
             // notifyIconCtrl
