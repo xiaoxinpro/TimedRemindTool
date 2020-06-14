@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TimedRemindTool
@@ -316,7 +318,28 @@ namespace TimedRemindTool
         /// <param name="e"></param>
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            AddTimedRemind(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text));
+            Button button = (Button)sender;
+            if (button.Enabled)
+            {
+                button.Enabled = false;
+                if (AddTimedRemind(new TimedRemind(dateTimeCtrl.Value, TimedMode, (TimedRemind.EnmuTimeLoop)comboBoxLoop.SelectedIndex, textBoxMark.Text)))
+                {
+                    button.Text = "添加完成";
+                }
+                else
+                {
+                    button.Text = "添加失败";
+                }
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(600);
+                    this.Invoke(new Action(() =>
+                    {
+                        button.Text = "添加";
+                        button.Enabled = true;
+                    }));
+                });
+            }
         }
 
         /// <summary>
@@ -404,17 +427,19 @@ namespace TimedRemindTool
         /// 添加定时
         /// </summary>
         /// <param name="tr"></param>
-        private void AddTimedRemind(TimedRemind tr)
+        private bool AddTimedRemind(TimedRemind tr)
         {
             listTimedRemind.Add(tr);
             listTimedRemind[listTimedRemind.Count - 1].BindTimedDone(TimedRemindDone);
             if (listTimedRemind[listTimedRemind.Count - 1].Start())
             {
                 AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
+                return true;
             }
             else
             {
                 listTimedRemind.RemoveAt(listTimedRemind.Count - 1);
+                return false;
             }
         }
 
