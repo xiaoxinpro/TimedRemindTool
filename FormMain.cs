@@ -75,8 +75,15 @@ namespace TimedRemindTool
         /// <param name="e"></param>
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            this.WindowState = FormWindowState.Minimized;
+            if (e.CloseReason.ToString() == "UserClosing")
+            {
+                e.Cancel = true;
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                CloseForm();
+            }
         }
         #endregion
 
