@@ -81,7 +81,7 @@
             this.comboBoxLoop.Location = new System.Drawing.Point(187, 19);
             this.comboBoxLoop.Name = "comboBoxLoop";
             this.comboBoxLoop.Size = new System.Drawing.Size(133, 20);
-            this.comboBoxLoop.TabIndex = 6;
+            this.comboBoxLoop.TabIndex = 5;
             // 
             // textBoxMark
             // 
@@ -89,7 +89,7 @@
             this.textBoxMark.Location = new System.Drawing.Point(187, 42);
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(133, 23);
-            this.textBoxMark.TabIndex = 5;
+            this.textBoxMark.TabIndex = 2;
             // 
             // label2
             // 
@@ -115,7 +115,7 @@
             this.buttonAdd.Location = new System.Drawing.Point(348, 19);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(96, 46);
-            this.buttonAdd.TabIndex = 3;
+            this.buttonAdd.TabIndex = 6;
             this.buttonAdd.Text = "添加";
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -127,7 +127,7 @@
             this.radioButtonTimed.Location = new System.Drawing.Point(72, 20);
             this.radioButtonTimed.Name = "radioButtonTimed";
             this.radioButtonTimed.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonTimed.TabIndex = 2;
+            this.radioButtonTimed.TabIndex = 4;
             this.radioButtonTimed.Tag = "1";
             this.radioButtonTimed.Text = "闹钟";
             this.radioButtonTimed.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.radioButtonTimekeep.Location = new System.Drawing.Point(19, 20);
             this.radioButtonTimekeep.Name = "radioButtonTimekeep";
             this.radioButtonTimekeep.Size = new System.Drawing.Size(47, 16);
-            this.radioButtonTimekeep.TabIndex = 2;
+            this.radioButtonTimekeep.TabIndex = 3;
             this.radioButtonTimekeep.TabStop = true;
             this.radioButtonTimekeep.Tag = "0";
             this.radioButtonTimekeep.Text = "计时";
@@ -192,25 +192,25 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
             this.notifyContextMenu.Name = "contextMenuStrip1";
-            this.notifyContextMenu.Size = new System.Drawing.Size(181, 76);
+            this.notifyContextMenu.Size = new System.Drawing.Size(131, 54);
             // 
             // toolStripMenuItemOpen
             // 
             this.toolStripMenuItemOpen.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(130, 22);
             this.toolStripMenuItemOpen.Text = "显示/隐藏";
             this.toolStripMenuItemOpen.Click += new System.EventHandler(this.toolStripMenuItemOpen_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(130, 22);
             this.toolStripMenuItemExit.Text = "退出";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
