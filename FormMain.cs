@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -350,6 +351,19 @@ namespace TimedRemindTool
         }
 
         /// <summary>
+        /// 输入框输入事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxMark_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                callOnClick(buttonAdd);
+            }
+        }
+
+        /// <summary>
         /// 定时模式切换事件
         /// </summary>
         /// <param name="sender"></param>
@@ -480,6 +494,28 @@ namespace TimedRemindTool
         }
 
 
+        #endregion
+
+        #region 私有函数
+
+        /// <summary>
+        /// 模拟按钮点击事件
+        /// </summary>
+        /// <param name="btn">按钮控件</param>
+        private void callOnClick(Button btn)
+        {
+            //建立一个类型  
+            Type t = typeof(Button);
+            //参数对象  
+            object[] p = new object[1];
+            //产生方法  
+            MethodInfo m = t.GetMethod("OnClick", BindingFlags.NonPublic | BindingFlags.Instance);
+            //参数赋值。传入函数  
+            p[0] = EventArgs.Empty;
+            //调用  
+            m.Invoke(btn, p);
+            return;
+        }
         #endregion
 
     }

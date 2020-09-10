@@ -90,6 +90,7 @@
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(133, 23);
             this.textBoxMark.TabIndex = 2;
+            this.textBoxMark.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMark_KeyPress);
             // 
             // label2
             // 
