@@ -45,6 +45,15 @@ namespace TimedRemindTool
         public bool Start()
         {
             int delayTime = TimeDate.Second + TimeDate.Minute * 60 + TimeDate.Hour * 3600;
+            if (TimedMode == EnmuTimedMode.Timed)
+            {
+                DateTime now = DateTime.Now;
+                delayTime -= now.Second + now.Minute * 60 + now.Hour * 3600;
+                if (delayTime < 0)
+                {
+                    delayTime += 24 * 3600;
+                }
+            }
             Status = EnmuTimedStatus.Ready;
             if (delayTime <= 0)
             {
@@ -69,6 +78,10 @@ namespace TimedRemindTool
                     {
                         Status = EnmuTimedStatus.Done;
                     }
+                    if (TimeLoop == EnmuTimeLoop.More && TimedMode == EnmuTimedMode.Timed)
+                    {
+                        delayTime = 24 * 3600;
+                    }
                     EventTimedDone?.Invoke(this);
                 }
             });
@@ -83,8 +96,8 @@ namespace TimedRemindTool
 
         public enum EnmuTimedMode
         {
-            Timekeep = 0,
-            Timed = 1,
+            Timekeep = 0,   //计时器
+            Timed = 1,      //闹钟
         }
 
         public enum EnmuTimeLoop
