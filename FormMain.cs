@@ -360,6 +360,7 @@ namespace TimedRemindTool
             if (e.KeyChar == (char)Keys.Enter)
             {
                 callOnClick(buttonAdd);
+                listViewTimed.Select();
             }
         }
 
@@ -517,6 +518,5 @@ namespace TimedRemindTool
             return;
         }
         #endregion
-
     }
 }
