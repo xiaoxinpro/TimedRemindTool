@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\ConfigMain.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +81,7 @@
     <Compile Include="FormRemind.Designer.cs">
       <DependentUpon>FormRemind.cs</DependentUpon>
     </Compile>
+    <Compile Include="Config\IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimedRemind.cs" />
