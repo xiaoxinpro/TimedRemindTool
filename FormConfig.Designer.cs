@@ -42,6 +42,8 @@
             this.Name = "FormConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormConfig";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfig_FormClosing);
+            this.Load += new System.EventHandler(this.FormConfig_Load);
             this.ResumeLayout(false);
 
         }

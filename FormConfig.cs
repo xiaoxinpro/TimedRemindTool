@@ -15,5 +15,16 @@ namespace TimedRemindTool
         {
             InitializeComponent();
         }
+
+        private void FormConfig_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormConfig_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
     }
 }
