@@ -47,6 +47,7 @@
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIconCtrl = new System.Windows.Forms.NotifyIcon(this.components);
             this.timerListView = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxAddTimed.SuspendLayout();
             this.groupBoxTimdeLIst.SuspendLayout();
             this.notifyContextMenu.SuspendLayout();
@@ -189,28 +190,29 @@
             // 
             this.notifyContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemOpen,
+            this.toolStripMenuConfig,
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
             this.notifyContextMenu.Name = "contextMenuStrip1";
-            this.notifyContextMenu.Size = new System.Drawing.Size(131, 54);
+            this.notifyContextMenu.Size = new System.Drawing.Size(181, 98);
             // 
             // toolStripMenuItemOpen
             // 
             this.toolStripMenuItemOpen.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(130, 22);
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemOpen.Text = "显示/隐藏";
             this.toolStripMenuItemOpen.Click += new System.EventHandler(this.toolStripMenuItemOpen_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(130, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemExit.Text = "退出";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
@@ -226,6 +228,13 @@
             // 
             this.timerListView.Enabled = true;
             this.timerListView.Tick += new System.EventHandler(this.timerListView_Tick);
+            // 
+            // toolStripMenuConfig
+            // 
+            this.toolStripMenuConfig.Name = "toolStripMenuConfig";
+            this.toolStripMenuConfig.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuConfig.Text = "设置";
+            this.toolStripMenuConfig.Click += new System.EventHandler(this.toolStripMenuConfig_Click);
             // 
             // FormMain
             // 
@@ -270,6 +279,7 @@
         private System.Windows.Forms.RadioButton radioButtonTimed;
         private System.Windows.Forms.RadioButton radioButtonTimekeep;
         private System.Windows.Forms.Timer timerListView;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuConfig;
     }
 }
 

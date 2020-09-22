@@ -18,6 +18,7 @@ namespace TimedRemindTool
         private List<TimedRemind> listTimedRemind = new List<TimedRemind>();
         private TimedRemind.EnmuTimedMode TimedMode = TimedRemind.EnmuTimedMode.Timekeep;
         private DateTime BakTimedValue;
+        private Form formConfig;
         #endregion
 
         #region 窗体事件
@@ -42,6 +43,9 @@ namespace TimedRemindTool
             
             //初始化表格
             InitListViewTimed(listViewTimed);
+
+            //创建配置界面
+            formConfig = new FormConfig();
         }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace TimedRemindTool
             //初始化下拉列表
             InitComboBoxLoop(comboBoxLoop);
 
+            //初始化定时模式
             InitTimedMode();
 
             textBoxMark.Text = INIFILE.ConfigMain.DefaultMarkValue;
@@ -118,6 +123,9 @@ namespace TimedRemindTool
             notifyIcon.Text = this.Text;
         }
 
+        /// <summary>
+        /// 初始化定时模式
+        /// </summary>
         private void InitTimedMode()
         {
             switch ((TimedRemind.EnmuTimedMode)Convert.ToInt32(INIFILE.ConfigMain.DefaultTimedMode))
@@ -453,6 +461,16 @@ namespace TimedRemindTool
         }
 
         /// <summary>
+        /// 托盘菜单 - 设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuConfig_Click(object sender, EventArgs e)
+        {
+            formConfig.Show();
+        }
+
+        /// <summary>
         /// 托盘菜单 - 退出
         /// </summary>
         /// <param name="sender"></param>
@@ -537,5 +555,6 @@ namespace TimedRemindTool
             return;
         }
         #endregion
+
     }
 }
