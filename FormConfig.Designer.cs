@@ -30,31 +30,36 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfig));
             this.groupBoxDefault = new System.Windows.Forms.GroupBox();
-            this.comboBoxLoop = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBoxAutoAdd = new System.Windows.Forms.CheckBox();
+            this.checkBoxSave = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoRun = new System.Windows.Forms.CheckBox();
             this.textBoxMark = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.comboBoxLoop = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxMode = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBoxRemind = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxModel = new System.Windows.Forms.TextBox();
+            this.btnModelFont = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labelModel = new System.Windows.Forms.Label();
             this.groupBoxDefault.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxRemind.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxDefault
             // 
-            this.groupBoxDefault.Controls.Add(this.checkBox2);
-            this.groupBoxDefault.Controls.Add(this.checkBox3);
-            this.groupBoxDefault.Controls.Add(this.checkBox1);
+            this.groupBoxDefault.Controls.Add(this.checkBoxAutoAdd);
+            this.groupBoxDefault.Controls.Add(this.checkBoxSave);
+            this.groupBoxDefault.Controls.Add(this.checkBoxAutoRun);
             this.groupBoxDefault.Controls.Add(this.textBoxMark);
             this.groupBoxDefault.Controls.Add(this.label3);
-            this.groupBoxDefault.Controls.Add(this.comboBox1);
-            this.groupBoxDefault.Controls.Add(this.label1);
             this.groupBoxDefault.Controls.Add(this.comboBoxLoop);
+            this.groupBoxDefault.Controls.Add(this.label1);
+            this.groupBoxDefault.Controls.Add(this.comboBoxMode);
             this.groupBoxDefault.Controls.Add(this.label2);
             this.groupBoxDefault.Location = new System.Drawing.Point(12, 12);
             this.groupBoxDefault.Name = "groupBoxDefault";
@@ -63,47 +68,36 @@
             this.groupBoxDefault.TabStop = false;
             this.groupBoxDefault.Text = "全局配置";
             // 
-            // comboBoxLoop
+            // checkBoxAutoAdd
             // 
-            this.comboBoxLoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxLoop.FormattingEnabled = true;
-            this.comboBoxLoop.Items.AddRange(new object[] {
-            "单次运行",
-            "周期运行"});
-            this.comboBoxLoop.Location = new System.Drawing.Point(70, 20);
-            this.comboBoxLoop.Name = "comboBoxLoop";
-            this.comboBoxLoop.Size = new System.Drawing.Size(86, 20);
-            this.comboBoxLoop.TabIndex = 7;
+            this.checkBoxAutoAdd.AutoSize = true;
+            this.checkBoxAutoAdd.Enabled = false;
+            this.checkBoxAutoAdd.Location = new System.Drawing.Point(101, 80);
+            this.checkBoxAutoAdd.Name = "checkBoxAutoAdd";
+            this.checkBoxAutoAdd.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxAutoAdd.TabIndex = 10;
+            this.checkBoxAutoAdd.Text = "启动时创建任务";
+            this.checkBoxAutoAdd.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // checkBoxSave
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "默认模式：";
+            this.checkBoxSave.AutoSize = true;
+            this.checkBoxSave.Location = new System.Drawing.Point(215, 80);
+            this.checkBoxSave.Name = "checkBoxSave";
+            this.checkBoxSave.Size = new System.Drawing.Size(132, 16);
+            this.checkBoxSave.TabIndex = 10;
+            this.checkBoxSave.Text = "保留上次为完成任务";
+            this.checkBoxSave.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // checkBoxAutoRun
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(180, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "默认条件：";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "单次运行",
-            "周期运行"});
-            this.comboBox1.Location = new System.Drawing.Point(241, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(106, 20);
-            this.comboBox1.TabIndex = 7;
+            this.checkBoxAutoRun.AutoSize = true;
+            this.checkBoxAutoRun.Location = new System.Drawing.Point(11, 80);
+            this.checkBoxAutoRun.Name = "checkBoxAutoRun";
+            this.checkBoxAutoRun.Size = new System.Drawing.Size(84, 16);
+            this.checkBoxAutoRun.TabIndex = 10;
+            this.checkBoxAutoRun.Text = "开机自启动";
+            this.checkBoxAutoRun.UseVisualStyleBackColor = true;
             // 
             // textBoxMark
             // 
@@ -122,61 +116,113 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "默认备注：";
             // 
-            // checkBox1
+            // comboBoxLoop
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(11, 80);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 16);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "开机自启动";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.comboBoxLoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxLoop.FormattingEnabled = true;
+            this.comboBoxLoop.Items.AddRange(new object[] {
+            "单次运行",
+            "周期运行"});
+            this.comboBoxLoop.Location = new System.Drawing.Point(241, 20);
+            this.comboBoxLoop.Name = "comboBoxLoop";
+            this.comboBoxLoop.Size = new System.Drawing.Size(106, 20);
+            this.comboBoxLoop.TabIndex = 7;
             // 
-            // checkBox2
+            // label1
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(101, 80);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(108, 16);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "启动时创建任务";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(180, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "默认条件：";
             // 
-            // checkBox3
+            // comboBoxMode
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(215, 80);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(132, 16);
-            this.checkBox3.TabIndex = 10;
-            this.checkBox3.Text = "保留上次为完成任务";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.comboBoxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMode.FormattingEnabled = true;
+            this.comboBoxMode.Items.AddRange(new object[] {
+            "计时",
+            "闹钟"});
+            this.comboBoxMode.Location = new System.Drawing.Point(70, 20);
+            this.comboBoxMode.Name = "comboBoxMode";
+            this.comboBoxMode.Size = new System.Drawing.Size(86, 20);
+            this.comboBoxMode.TabIndex = 7;
             // 
-            // groupBox1
+            // label2
             // 
-            this.groupBox1.Controls.Add(this.listView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 127);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 422);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "启动任务";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "默认模式：";
             // 
-            // listView1
+            // groupBoxRemind
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 20);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(348, 396);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.groupBoxRemind.Controls.Add(this.groupBox2);
+            this.groupBoxRemind.Controls.Add(this.btnModelFont);
+            this.groupBoxRemind.Controls.Add(this.textBoxModel);
+            this.groupBoxRemind.Controls.Add(this.label4);
+            this.groupBoxRemind.Location = new System.Drawing.Point(12, 127);
+            this.groupBoxRemind.Name = "groupBoxRemind";
+            this.groupBoxRemind.Size = new System.Drawing.Size(360, 157);
+            this.groupBoxRemind.TabIndex = 2;
+            this.groupBoxRemind.TabStop = false;
+            this.groupBoxRemind.Text = "提醒弹窗";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "提示模板：";
+            // 
+            // textBoxModel
+            // 
+            this.textBoxModel.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.textBoxModel.Location = new System.Drawing.Point(70, 20);
+            this.textBoxModel.Name = "textBoxModel";
+            this.textBoxModel.Size = new System.Drawing.Size(196, 23);
+            this.textBoxModel.TabIndex = 8;
+            // 
+            // btnModelFont
+            // 
+            this.btnModelFont.Location = new System.Drawing.Point(272, 20);
+            this.btnModelFont.Name = "btnModelFont";
+            this.btnModelFont.Size = new System.Drawing.Size(75, 23);
+            this.btnModelFont.TabIndex = 10;
+            this.btnModelFont.Text = "字体样式";
+            this.btnModelFont.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.labelModel);
+            this.groupBox2.Location = new System.Drawing.Point(6, 49);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(348, 100);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "预览";
+            // 
+            // labelModel
+            // 
+            this.labelModel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelModel.Location = new System.Drawing.Point(6, 17);
+            this.labelModel.Name = "labelModel";
+            this.labelModel.Size = new System.Drawing.Size(336, 75);
+            this.labelModel.TabIndex = 0;
+            this.labelModel.Text = "预览";
+            this.labelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 561);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(384, 291);
+            this.Controls.Add(this.groupBoxRemind);
             this.Controls.Add(this.groupBoxDefault);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -188,7 +234,9 @@
             this.Load += new System.EventHandler(this.FormConfig_Load);
             this.groupBoxDefault.ResumeLayout(false);
             this.groupBoxDefault.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBoxRemind.ResumeLayout(false);
+            this.groupBoxRemind.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -196,16 +244,20 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxDefault;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxLoop;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxMode;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxAutoAdd;
+        private System.Windows.Forms.CheckBox checkBoxSave;
+        private System.Windows.Forms.CheckBox checkBoxAutoRun;
         private System.Windows.Forms.TextBox textBoxMark;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.GroupBox groupBoxRemind;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label labelModel;
+        private System.Windows.Forms.Button btnModelFont;
+        private System.Windows.Forms.TextBox textBoxModel;
+        private System.Windows.Forms.Label label4;
     }
 }
