@@ -78,6 +78,7 @@
             this.checkBoxAutoAdd.TabIndex = 10;
             this.checkBoxAutoAdd.Text = "启动时创建任务";
             this.checkBoxAutoAdd.UseVisualStyleBackColor = true;
+            this.checkBoxAutoAdd.CheckedChanged += new System.EventHandler(this.checkBoxAutoAdd_CheckedChanged);
             // 
             // checkBoxSave
             // 
@@ -88,6 +89,7 @@
             this.checkBoxSave.TabIndex = 10;
             this.checkBoxSave.Text = "保留上次为完成任务";
             this.checkBoxSave.UseVisualStyleBackColor = true;
+            this.checkBoxSave.CheckedChanged += new System.EventHandler(this.checkBoxSave_CheckedChanged);
             // 
             // checkBoxAutoRun
             // 
@@ -98,6 +100,7 @@
             this.checkBoxAutoRun.TabIndex = 10;
             this.checkBoxAutoRun.Text = "开机自启动";
             this.checkBoxAutoRun.UseVisualStyleBackColor = true;
+            this.checkBoxAutoRun.CheckedChanged += new System.EventHandler(this.checkBoxAutoRun_CheckedChanged);
             // 
             // textBoxMark
             // 
@@ -106,6 +109,7 @@
             this.textBoxMark.Name = "textBoxMark";
             this.textBoxMark.Size = new System.Drawing.Size(277, 23);
             this.textBoxMark.TabIndex = 8;
+            this.textBoxMark.TextChanged += new System.EventHandler(this.textBoxMark_TextChanged);
             // 
             // label3
             // 
@@ -127,6 +131,7 @@
             this.comboBoxLoop.Name = "comboBoxLoop";
             this.comboBoxLoop.Size = new System.Drawing.Size(106, 20);
             this.comboBoxLoop.TabIndex = 7;
+            this.comboBoxLoop.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoop_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -148,6 +153,7 @@
             this.comboBoxMode.Name = "comboBoxMode";
             this.comboBoxMode.Size = new System.Drawing.Size(86, 20);
             this.comboBoxMode.TabIndex = 7;
+            this.comboBoxMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxMode_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -187,6 +193,8 @@
             this.textBoxModel.Name = "textBoxModel";
             this.textBoxModel.Size = new System.Drawing.Size(196, 23);
             this.textBoxModel.TabIndex = 8;
+            this.textBoxModel.Text = "{text}";
+            this.textBoxModel.TextChanged += new System.EventHandler(this.textBoxModel_TextChanged);
             // 
             // btnModelFont
             // 
@@ -196,6 +204,7 @@
             this.btnModelFont.TabIndex = 10;
             this.btnModelFont.Text = "字体样式";
             this.btnModelFont.UseVisualStyleBackColor = true;
+            this.btnModelFont.Click += new System.EventHandler(this.btnModelFont_Click);
             // 
             // groupBox2
             // 

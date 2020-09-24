@@ -14,6 +14,8 @@ namespace INIFILE
         public static string DefaultTimeLoop = "0";
         public static string DefaultMarkValue = "";
         public static string DefaultTimeValue = "1:0:0";
+        public static bool IsAutoAdd = false;
+        public static bool IsSaveTimed = false;
 
         private static void Init()
         {
@@ -32,6 +34,8 @@ namespace INIFILE
             DefaultTimeLoop = _file.ReadString("Main", "DefaultTimeLoop", DefaultTimeLoop);
             DefaultMarkValue = _file.ReadString("Main", "DefaultMarkValue", DefaultMarkValue);
             DefaultTimeValue = _file.ReadString("Main", "DefaultTimeValue", DefaultTimeValue);
+            IsAutoAdd = Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsAutoAdd.ToString()));
+            IsSaveTimed = Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsSaveTimed.ToString()));
         }
 
         public static void Save()
@@ -41,6 +45,8 @@ namespace INIFILE
             _file.WriteString("Main", "DefaultTimeLoop", DefaultTimeLoop);
             _file.WriteString("Main", "DefaultMarkValue", DefaultMarkValue);
             _file.WriteString("Main", "DefaultTimeValue", DefaultTimeValue);
+            _file.WriteString("Main", "IsAutoAdd", IsAutoAdd.ToString());
+            _file.WriteString("Main", "IsAutoAdd", IsSaveTimed.ToString());
         }
     }
 }
