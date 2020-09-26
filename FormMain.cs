@@ -15,6 +15,7 @@ namespace TimedRemindTool
     public partial class FormMain : Form
     {
         #region//创建对象及声明变量
+        private string[] argsCommand;
         private List<TimedRemind> listTimedRemind = new List<TimedRemind>();
         private TimedRemind.EnmuTimedMode TimedMode = TimedRemind.EnmuTimedMode.Timekeep;
         private DateTime BakTimedValue;
@@ -22,8 +23,9 @@ namespace TimedRemindTool
         #endregion
 
         #region 窗体事件
-        public FormMain()
+        public FormMain(string[] args)
         {
+            argsCommand = args;
             InitializeComponent();
             INIFILE.ConfigMain.Load();
         }
@@ -46,6 +48,12 @@ namespace TimedRemindTool
 
             //创建配置界面
             formConfig = new FormConfig();
+
+            //处理启动命令
+            if (argsCommand.Length > 0 && argsCommand[0] == "-autorun")
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         /// <summary>
