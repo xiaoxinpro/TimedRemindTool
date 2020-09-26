@@ -58,6 +58,9 @@ namespace TimedRemindTool
 
             //初始备注输入框
             InitTextBoxMark(textBoxMark);
+
+            //初始化开机自启动
+            checkBoxAutoRun.Checked = AutoRun.IsAutoRun();
         }
 
         /// <summary>
@@ -139,6 +142,17 @@ namespace TimedRemindTool
         private void checkBoxAutoRun_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
+            if (checkBox.Checked != AutoRun.IsAutoRun())
+            {
+                if (checkBox.Checked)
+                {
+                    AutoRun.Open();
+                }
+                else
+                {
+                    AutoRun.Close();
+                }
+            }
         }
 
         /// <summary>
