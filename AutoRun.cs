@@ -49,7 +49,7 @@ namespace TimedRemindTool
             }
             else if (shortcutPaths.Count < 1)//不存在则创建快捷方式
             {
-                CreateShortcut(SystemStartPath, QuickName, AppAllPath, QuickName);
+                CreateShortcut(SystemStartPath, QuickName, AppAllPath, "-autorun", QuickName);
             }
         }
 
@@ -82,10 +82,11 @@ namespace TimedRemindTool
         /// <param name="directory">目标目录</param>
         /// <param name="shortcutName">快捷方式名字</param>
         /// <param name="targetPath">文件完全路径</param>
+        /// <param name="arguments">启动参数</param>
         /// <param name="description">描述</param>
         /// <param name="iconLocation">图标地址</param>
         /// <returns>成功或失败</returns>
-        private static bool CreateShortcut(string directory, string shortcutName, string targetPath, string description = null, string iconLocation = null)
+        private static bool CreateShortcut(string directory, string shortcutName, string targetPath, string arguments = "-autorun", string description = "", string iconLocation = null)
         {
             try
             {
@@ -95,6 +96,7 @@ namespace TimedRemindTool
                 WshShell shell = new IWshRuntimeLibrary.WshShell();
                 IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);    //创建快捷方式对象
                 shortcut.TargetPath = targetPath;                                                               //指定目标路径
+                shortcut.Arguments = arguments;                                                                 //设置启动参数
                 shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);                                  //设置起始位置
                 shortcut.WindowStyle = 1;                                                                       //设置运行方式，默认为常规窗口
                 shortcut.Description = description;                                                             //设置备注
