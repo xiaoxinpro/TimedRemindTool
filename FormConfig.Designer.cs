@@ -40,11 +40,11 @@
             this.comboBoxMode = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxRemind = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxModel = new System.Windows.Forms.TextBox();
-            this.btnModelFont = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelModel = new System.Windows.Forms.Label();
+            this.btnModelFont = new System.Windows.Forms.Button();
+            this.textBoxModel = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBoxDefault.SuspendLayout();
             this.groupBoxRemind.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -177,35 +177,6 @@
             this.groupBoxRemind.TabStop = false;
             this.groupBoxRemind.Text = "提醒弹窗";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 12);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "提示模板：";
-            // 
-            // textBoxModel
-            // 
-            this.textBoxModel.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.textBoxModel.Location = new System.Drawing.Point(70, 20);
-            this.textBoxModel.Name = "textBoxModel";
-            this.textBoxModel.Size = new System.Drawing.Size(196, 23);
-            this.textBoxModel.TabIndex = 8;
-            this.textBoxModel.Text = "{text}";
-            this.textBoxModel.TextChanged += new System.EventHandler(this.textBoxModel_TextChanged);
-            // 
-            // btnModelFont
-            // 
-            this.btnModelFont.Location = new System.Drawing.Point(272, 20);
-            this.btnModelFont.Name = "btnModelFont";
-            this.btnModelFont.Size = new System.Drawing.Size(75, 23);
-            this.btnModelFont.TabIndex = 10;
-            this.btnModelFont.Text = "字体样式";
-            this.btnModelFont.UseVisualStyleBackColor = true;
-            this.btnModelFont.Click += new System.EventHandler(this.btnModelFont_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.labelModel);
@@ -225,6 +196,34 @@
             this.labelModel.TabIndex = 0;
             this.labelModel.Text = "预览";
             this.labelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnModelFont
+            // 
+            this.btnModelFont.Location = new System.Drawing.Point(272, 20);
+            this.btnModelFont.Name = "btnModelFont";
+            this.btnModelFont.Size = new System.Drawing.Size(75, 23);
+            this.btnModelFont.TabIndex = 10;
+            this.btnModelFont.Text = "字体样式";
+            this.btnModelFont.UseVisualStyleBackColor = true;
+            this.btnModelFont.Click += new System.EventHandler(this.btnModelFont_Click);
+            // 
+            // textBoxModel
+            // 
+            this.textBoxModel.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.textBoxModel.Location = new System.Drawing.Point(70, 20);
+            this.textBoxModel.Name = "textBoxModel";
+            this.textBoxModel.Size = new System.Drawing.Size(196, 23);
+            this.textBoxModel.TabIndex = 8;
+            this.textBoxModel.TextChanged += new System.EventHandler(this.textBoxModel_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "提示模板：";
             // 
             // FormConfig
             // 

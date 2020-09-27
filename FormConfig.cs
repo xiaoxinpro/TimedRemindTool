@@ -59,6 +59,9 @@ namespace TimedRemindTool
             //初始备注输入框
             InitTextBoxMark(textBoxMark);
 
+            //初始化浏览Lable
+            InitRemindLabel(labelModel, textBoxModel);
+
             //初始化开机自启动
             checkBoxAutoRun.Checked = AutoRun.IsAutoRun();
         }
@@ -88,6 +91,13 @@ namespace TimedRemindTool
         private void InitTextBoxMark(TextBox textBox)
         {
             textBox.Text = INIFILE.ConfigMain.DefaultMarkValue;
+        }
+
+        private void InitRemindLabel(Label label, TextBox textModel)
+        {
+            textModel.Text = INIFILE.ConfigMain.RemindModel;
+            label.Font = StringToFont(INIFILE.ConfigMain.RemindFont);
+            label.ForeColor = StringToColor(INIFILE.ConfigMain.RemindForeColor);
         }
         #endregion
 
@@ -191,7 +201,7 @@ namespace TimedRemindTool
         private void textBoxModel_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            labelModel.Text = textBox.Text.Replace("{text}", "提示内容");
+            labelModel.Text = textBox.Text.Replace("{text}", "【备注内容】");
         }
 
         /// <summary>
@@ -207,12 +217,35 @@ namespace TimedRemindTool
             fontDialog.Color = labelModel.ForeColor;
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
-                labelModel.Font = fontDialog.Font;
-                labelModel.ForeColor = fontDialog.Color;
+                INIFILE.ConfigMain.RemindFont = FontToString(fontDialog.Font);
+                INIFILE.ConfigMain.RemindForeColor = ColorToString(fontDialog.Color);
+                InitRemindLabel(labelModel, textBoxModel);
             }
         }
         #endregion
 
+        #region 私有函数
+        private Color StringToColor(string strColor)
+        {
+            return ColorTranslator.FromHtml(strColor);
+        }
 
+        private string ColorToString(Color color)
+        {
+            return ColorTranslator.ToHtml(color);
+        }
+
+        private Font StringToFont(string strFont)
+        {
+            FontConverter fc = new FontConverter();
+            return (Font)fc.ConvertFromString(strFont);
+        }
+
+        private string FontToString(Font font)
+        {
+            FontConverter fc = new FontConverter();
+            return fc.ConvertToInvariantString(font);
+        }
+        #endregion
     }
 }
