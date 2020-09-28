@@ -6,7 +6,7 @@ using System.Text;
 
 namespace INIFILE
 {
-    public class ConfigMain
+    public class Config
     {
         #region 内部变量
         private static IniFile _file;
@@ -24,7 +24,7 @@ namespace INIFILE
         #endregion
 
         #region 提醒弹出变量
-        public static string RemindModel = "{text}";
+        public static string RemindModel = " 定时提醒事件【{text}】";
         public static string RemindFont = "微软雅黑, 15pt";
         public static string RemindForeColor = "ControlText";
 
@@ -43,8 +43,8 @@ namespace INIFILE
             DefaultTimeLoop = _file.ReadString("Main", "DefaultTimeLoop", DefaultTimeLoop);
             DefaultMarkValue = _file.ReadString("Main", "DefaultMarkValue", DefaultMarkValue);
             DefaultTimeValue = _file.ReadString("Main", "DefaultTimeValue", DefaultTimeValue);
-            IsAutoAdd = Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsAutoAdd.ToString()));
-            IsSaveTimed = Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsSaveTimed.ToString()));
+            IsAutoAdd = System.Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsAutoAdd.ToString()));
+            IsSaveTimed = System.Convert.ToBoolean(_file.ReadString("Main", "IsAutoAdd", IsSaveTimed.ToString()));
 
             RemindModel = _file.ReadString("Remind", "RemindModel", RemindModel);
             RemindFont = _file.ReadString("Remind", "RemindFont", RemindFont);
