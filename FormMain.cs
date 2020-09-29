@@ -27,7 +27,7 @@ namespace TimedRemindTool
         {
             argsCommand = args;
             InitializeComponent();
-            INIFILE.ConfigMain.Load();
+            INIFILE.Config.Load();
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace TimedRemindTool
             //初始化定时模式
             InitTimedMode();
 
-            textBoxMark.Text = INIFILE.ConfigMain.DefaultMarkValue;
+            textBoxMark.Text = INIFILE.Config.DefaultMarkValue;
 
             DateTime dt = DateTime.Now;
             dateTimeCtrl.Value = new DateTime(dt.Year, dt.Month, dt.Day, 1, 0, 0);
@@ -136,7 +136,7 @@ namespace TimedRemindTool
         /// </summary>
         private void InitTimedMode()
         {
-            switch ((TimedRemind.EnmuTimedMode)Convert.ToInt32(INIFILE.ConfigMain.DefaultTimedMode))
+            switch ((TimedRemind.EnmuTimedMode)Convert.ToInt32(INIFILE.Config.DefaultTimedMode))
             {
                 case TimedRemind.EnmuTimedMode.Timekeep:
                     radioButtonTimed.Checked = false;
@@ -157,7 +157,7 @@ namespace TimedRemindTool
         /// <param name="comboBox"></param>
         private void InitComboBoxLoop(ComboBox comboBox)
         {
-            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.ConfigMain.DefaultTimeLoop);
+            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.Config.DefaultTimeLoop);
         }
 
         /// <summary>
