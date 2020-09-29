@@ -69,7 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoRun.cs" />
-    <Compile Include="Config\ConfigMain.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\Convert.cs" />
     <Compile Include="FormConfig.cs">
       <SubType>Form</SubType>
     </Compile>
