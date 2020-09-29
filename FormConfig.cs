@@ -40,7 +40,7 @@ namespace TimedRemindTool
         {
             this.Hide();
             e.Cancel = true;
-            INIFILE.ConfigMain.Save();
+            INIFILE.Config.Save();
         }
         #endregion
 
@@ -72,7 +72,7 @@ namespace TimedRemindTool
         /// <param name="comboBox"></param>
         private void InitComboBoxMode(ComboBox comboBox)
         {
-            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.ConfigMain.DefaultTimedMode);
+            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.Config.DefaultTimedMode);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace TimedRemindTool
         /// <param name="comboBox"></param>
         private void InitComboBoxLoop(ComboBox comboBox)
         {
-            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.ConfigMain.DefaultTimeLoop);
+            comboBox.SelectedIndex = Convert.ToInt32(INIFILE.Config.DefaultTimeLoop);
         }
 
         /// <summary>
@@ -90,14 +90,14 @@ namespace TimedRemindTool
         /// <param name="textBox"></param>
         private void InitTextBoxMark(TextBox textBox)
         {
-            textBox.Text = INIFILE.ConfigMain.DefaultMarkValue;
+            textBox.Text = INIFILE.Config.DefaultMarkValue;
         }
 
         private void InitRemindLabel(Label label, TextBox textModel)
         {
-            textModel.Text = INIFILE.ConfigMain.RemindModel;
-            label.Font = StringToFont(INIFILE.ConfigMain.RemindFont);
-            label.ForeColor = StringToColor(INIFILE.ConfigMain.RemindForeColor);
+            textModel.Text = INIFILE.Config.RemindModel;
+            label.Font = INIFILE.Convert.StringToFont(INIFILE.Config.RemindFont);
+            label.ForeColor = INIFILE.Convert.StringToColor(INIFILE.Config.RemindForeColor);
         }
         #endregion
 
@@ -110,9 +110,9 @@ namespace TimedRemindTool
         private void comboBoxMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            if (comboBox.SelectedIndex != Convert.ToInt32(INIFILE.ConfigMain.DefaultTimedMode))
+            if (comboBox.SelectedIndex != Convert.ToInt32(INIFILE.Config.DefaultTimedMode))
             {
-                INIFILE.ConfigMain.DefaultTimedMode = comboBox.SelectedIndex.ToString();
+                INIFILE.Config.DefaultTimedMode = comboBox.SelectedIndex.ToString();
             }
         }
 
@@ -124,9 +124,9 @@ namespace TimedRemindTool
         private void comboBoxLoop_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            if (comboBox.SelectedIndex != Convert.ToInt32(INIFILE.ConfigMain.DefaultTimeLoop))
+            if (comboBox.SelectedIndex != Convert.ToInt32(INIFILE.Config.DefaultTimeLoop))
             {
-                INIFILE.ConfigMain.DefaultTimeLoop = comboBox.SelectedIndex.ToString();
+                INIFILE.Config.DefaultTimeLoop = comboBox.SelectedIndex.ToString();
             }
         }
 
@@ -138,9 +138,9 @@ namespace TimedRemindTool
         private void textBoxMark_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            if (textBox.Text != INIFILE.ConfigMain.DefaultMarkValue)
+            if (textBox.Text != INIFILE.Config.DefaultMarkValue)
             {
-                INIFILE.ConfigMain.DefaultMarkValue = textBox.Text;
+                INIFILE.Config.DefaultMarkValue = textBox.Text;
             }
         }
 
@@ -173,9 +173,9 @@ namespace TimedRemindTool
         private void checkBoxAutoAdd_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            if (checkBox.Checked != INIFILE.ConfigMain.IsAutoAdd)
+            if (checkBox.Checked != INIFILE.Config.IsAutoAdd)
             {
-                INIFILE.ConfigMain.IsAutoAdd = checkBox.Checked;
+                INIFILE.Config.IsAutoAdd = checkBox.Checked;
             }
         }
 
@@ -187,9 +187,9 @@ namespace TimedRemindTool
         private void checkBoxSave_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            if (checkBox.Checked != INIFILE.ConfigMain.IsSaveTimed)
+            if (checkBox.Checked != INIFILE.Config.IsSaveTimed)
             {
-                INIFILE.ConfigMain.IsSaveTimed = checkBox.Checked;
+                INIFILE.Config.IsSaveTimed = checkBox.Checked;
             }
         }
 
@@ -201,7 +201,8 @@ namespace TimedRemindTool
         private void textBoxModel_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            labelModel.Text = textBox.Text.Replace("{text}", "【备注内容】");
+            INIFILE.Config.RemindModel = textBox.Text;
+            labelModel.Text = INIFILE.Config.RemindModel.Replace("{text}", "备注内容");
         }
 
         /// <summary>
@@ -217,35 +218,13 @@ namespace TimedRemindTool
             fontDialog.Color = labelModel.ForeColor;
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
-                INIFILE.ConfigMain.RemindFont = FontToString(fontDialog.Font);
-                INIFILE.ConfigMain.RemindForeColor = ColorToString(fontDialog.Color);
+                INIFILE.Config.RemindFont = INIFILE.Convert.FontToString(fontDialog.Font);
+                INIFILE.Config.RemindForeColor = INIFILE.Convert.ColorToString(fontDialog.Color);
                 InitRemindLabel(labelModel, textBoxModel);
             }
         }
         #endregion
 
-        #region 私有函数
-        private Color StringToColor(string strColor)
-        {
-            return ColorTranslator.FromHtml(strColor);
-        }
 
-        private string ColorToString(Color color)
-        {
-            return ColorTranslator.ToHtml(color);
-        }
-
-        private Font StringToFont(string strFont)
-        {
-            FontConverter fc = new FontConverter();
-            return (Font)fc.ConvertFromString(strFont);
-        }
-
-        private string FontToString(Font font)
-        {
-            FontConverter fc = new FontConverter();
-            return fc.ConvertToInvariantString(font);
-        }
-        #endregion
     }
 }
