@@ -17,9 +17,9 @@ namespace TimedRemindTool
         private int x;
         private int y;
 
-        public FormRemind(String strMessage)
+        public FormRemind(string strMessage)
         {
-            this.strMessage = " 定时提醒事件【" + strMessage+ " 】";
+            this.strMessage = INIFILE.Config.RemindModel.Replace("{text}", strMessage);
             InitializeComponent();
         }
 
@@ -30,6 +30,8 @@ namespace TimedRemindTool
             x = this.Left;
             y = this.Top;
             this.labelMessage.Text = this.strMessage;
+            this.labelMessage.ForeColor = INIFILE.Convert.StringToColor(INIFILE.Config.RemindForeColor);
+            this.labelMessage.Font = INIFILE.Convert.StringToFont(INIFILE.Config.RemindFont);
             timerForm.Start();
         }
 
