@@ -87,7 +87,7 @@
             this.checkBoxSave.Name = "checkBoxSave";
             this.checkBoxSave.Size = new System.Drawing.Size(132, 16);
             this.checkBoxSave.TabIndex = 10;
-            this.checkBoxSave.Text = "保留上次为完成任务";
+            this.checkBoxSave.Text = "保留上次未完成任务";
             this.checkBoxSave.UseVisualStyleBackColor = true;
             this.checkBoxSave.CheckedChanged += new System.EventHandler(this.checkBoxSave_CheckedChanged);
             // 
