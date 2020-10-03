@@ -501,6 +501,19 @@ namespace TimedRemindTool
             if (listTimedRemind[listTimedRemind.Count - 1].Start())
             {
                 AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
+                //Task.Factory.StartNew(() =>
+                //{
+                //    Thread.Sleep(5000);
+                //    this.Invoke(new Action(() =>
+                //    {
+                //        TimedRemind tmp = new TimedRemind(tr.ToString(), TimedRemindDone);
+                //        tmp.Mark += " - Copy";
+                //        if (tmp.Status != TimedRemind.EnmuTimedStatus.Done)
+                //        {
+                //            listTimedRemind.Add(tmp);
+                //        }
+                //    }));
+                //});
                 return true;
             }
             else
@@ -530,12 +543,16 @@ namespace TimedRemindTool
             TimedRemind tm = (TimedRemind)sender;
             this.Invoke(new Action(() =>
             {
-                ShowForm(this.notifyIconCtrl);
-                Form formMessage = new FormRemind(tm.Mark);
-                formMessage.Show();
-                //this.TopMost = true;
-                //MessageBox.Show(tm.Mark, "定时提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //this.TopMost = false;
+                try
+                {
+                    ShowForm(this.notifyIconCtrl);
+                    Form formMessage = new FormRemind(tm.Mark);
+                    formMessage.Show();
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                }
             }));
         }
 
