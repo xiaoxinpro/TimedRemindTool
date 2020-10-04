@@ -50,6 +50,35 @@ namespace TimedRemindTool
             Status = EnmuTimedStatus.Ready;
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="tr">配置字符串</param>
+        /// <param name="e">提醒回调函数</param>
+        public TimedRemind(string tr, DelegateTimedDone e = null)
+        {
+            string[] arr = tr.Split(new char[1] { '|'});
+            if (arr.Length > 5)
+            {
+                TimedMode = (EnmuTimedMode)Enum.Parse(typeof(EnmuTimedMode), arr[0], true);
+                TimeLoop = (EnmuTimeLoop)Enum.Parse(typeof(EnmuTimeLoop), arr[1], true);
+                TimeDate = Convert.ToDateTime(arr[2]);
+                Mark = arr[3];
+                DateTime dtStart = Convert.ToDateTime(arr[4]);
+                DateTime dtEnd = Convert.ToDateTime(arr[5]);
+                Status = EnmuTimedStatus.Ready;
+                if (e != null)
+                {
+                    BindTimedDone(e);
+                }
+                Start(dtStart, dtEnd);
+            }
+            else
+            {
+                Status = EnmuTimedStatus.Done;
+            }
+        }
+
         #endregion
 
         #region 公共函数
@@ -59,8 +88,8 @@ namespace TimedRemindTool
         /// <returns></returns>
         public bool Start()
         {
-            int delayTime = getDelayTime(TimeDate, TimedMode);
-            return Start(DateTime.Now, DateTime.Now.AddSeconds(delayTime));
+            DateTime now = DateTime.Now;
+            return Start(now, GetEndTime(TimeDate, now));
         }
 
         /// <summary>
@@ -71,50 +100,49 @@ namespace TimedRemindTool
         /// <returns></returns>
         public bool Start(DateTime dtStart, DateTime dtEnd)
         {
-            int delayTime = getDelayTime(TimeDate, TimedMode);
-            if (DateTime.Now > dtEnd)
+            DateTime now = DateTime.Now;
+            int delayTime = GetDelayTime(TimeDate, TimedMode);
+            if (now > dtEnd)
             {
                 if (TimeLoop == EnmuTimeLoop.More)
                 {
                     if (TimedMode == EnmuTimedMode.Timekeep)
                     {
-                        while (dtEnd <= DateTime.Now)
+                        while (dtEnd <= now)
                         {
-                            dtStart.AddSeconds(delayTime);
-                            dtEnd.AddSeconds(delayTime);
+                            dtStart = dtStart.AddSeconds(delayTime);
+                            dtEnd = dtEnd.AddSeconds(delayTime);
                         }
                     }
                     else
                     {
-                        dtStart = DateTime.Now;
+                        dtStart = now;
                         dtEnd = new DateTime(dtStart.Year, dtStart.Month, dtStart.Day, TimeDate.Hour, TimeDate.Minute, TimeDate.Second);
                         while (dtEnd <= dtStart)
                         {
-                            dtEnd.AddDays(1);
+                            dtEnd = dtEnd.AddDays(1);
                         }
                     }
                 }
                 else
                 {
+                    Status = EnmuTimedStatus.Done;
                     return false;
                 }
             }
             StartTime = dtStart;
             EndTime = dtEnd;
-            delayTime = Convert.ToInt32(EndTime.Subtract(DateTime.Now).TotalSeconds);
-            Status = EnmuTimedStatus.Ready;
-            if (delayTime <= 0)
+            if (EndTime <= DateTime.Now)
             {
+                Status = EnmuTimedStatus.Done;
                 return false;
             }
+            Status = EnmuTimedStatus.Ready;
             TimedThread = new Thread(() =>
             {
-                while (true)
+                while (Status != EnmuTimedStatus.Done)
                 {
-                    int delay = delayTime;
-                    StartTime = DateTime.Now;
-                    EndTime = StartTime.AddSeconds(delay);
-                    while (delay-- > 0)
+                    while (EndTime >= DateTime.Now)
                     {
                         if (Status == EnmuTimedStatus.Done)
                         {
@@ -126,9 +154,18 @@ namespace TimedRemindTool
                     {
                         Status = EnmuTimedStatus.Done;
                     }
-                    if (TimeLoop == EnmuTimeLoop.More && TimedMode == EnmuTimedMode.Timed)
+                    if (TimeLoop == EnmuTimeLoop.More)
                     {
-                        delayTime = 24 * 3600;
+                        if (TimedMode == EnmuTimedMode.Timed)
+                        {
+                            StartTime = StartTime.AddDays(1);
+                            EndTime = EndTime.AddDays(1);
+                        }
+                        else
+                        {
+                            StartTime = DateTime.Now;
+                            EndTime = GetEndTime(TimeDate, StartTime);
+                        }
                     }
                     EventTimedDone?.Invoke(this);
                 }
@@ -137,9 +174,29 @@ namespace TimedRemindTool
             return true;
         }
 
+        /// <summary>
+        /// 停止定时
+        /// </summary>
         public void Stop()
         {
             Status = EnmuTimedStatus.Done;
+        }
+
+        /// <summary>
+        /// 定时转字符串
+        /// </summary>
+        /// <returns>字符串</returns>
+        public override string ToString()
+        {
+            List<string> tr = new List<string>();
+            tr.Add(TimedMode.ToString());
+            tr.Add(TimeLoop.ToString());
+            tr.Add(TimeDate.ToString());
+            tr.Add(Mark);
+            tr.Add(StartTime.ToString());
+            tr.Add(EndTime.ToString());
+            tr.Add(Status.ToString());
+            return string.Join("|", tr.ToArray());
         }
 
         #endregion
@@ -151,7 +208,7 @@ namespace TimedRemindTool
         /// <param name="dt">指定未来时间</param>
         /// <param name="mode">定时模式</param>
         /// <returns>待延时的秒数</returns>
-        private int getDelayTime(DateTime dt, EnmuTimedMode mode = EnmuTimedMode.Timekeep)
+        private int GetDelayTime(DateTime dt, EnmuTimedMode mode = EnmuTimedMode.Timekeep)
         {
             int delayTime = 0;
             if (mode == EnmuTimedMode.Timekeep)
@@ -168,6 +225,21 @@ namespace TimedRemindTool
                 }
             }
             return delayTime;
+        }
+
+        /// <summary>
+        /// 获取结束事件
+        /// </summary>
+        /// <param name="dt">时间长度</param>
+        /// <param name="now">当前时间</param>
+        /// <returns></returns>
+        private DateTime GetEndTime(DateTime dt, DateTime now = default)
+        {
+            if (now == default)
+            {
+                now = DateTime.Now;
+            }
+            return now.AddHours(dt.Hour).AddMinutes(dt.Minute).AddSeconds(dt.Second);
         }
         #endregion
 
