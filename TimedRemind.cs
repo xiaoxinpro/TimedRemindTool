@@ -137,7 +137,7 @@ namespace TimedRemindTool
                 Status = EnmuTimedStatus.Done;
                 return false;
             }
-            Status = EnmuTimedStatus.Ready;
+            Status = EnmuTimedStatus.Run;
             TimedThread = new Thread(() =>
             {
                 while (Status != EnmuTimedStatus.Done)
