@@ -50,6 +50,9 @@ namespace TimedRemindTool
             //初始化表格
             InitListViewTimed(listViewTimed);
 
+            //加载列表内容
+            LoadListViewTimed(listViewTimed, Global.BackupPath);
+
             //创建配置界面
             formConfig = new FormConfig();
 
@@ -184,10 +187,17 @@ namespace TimedRemindTool
             listView.Columns.Add("剩余时间", 70, HorizontalAlignment.Center);
             listView.Columns.Add("循环方式", 70, HorizontalAlignment.Center);
             listView.Columns.Add("备注", 100, HorizontalAlignment.Center);
+        }
 
-            //创建列表内容
+        /// <summary>
+        /// 加载列表内容
+        /// </summary>
+        /// <param name="listView"></param>
+        private void LoadListViewTimed(ListView listView, string path)
+        {
+            //加载列表内容
             listView.BeginUpdate();
-            LoadTimedRemind(Global.BackupPath);
+            LoadTimedRemind(path);
             listView.EndUpdate();
         }
         #endregion
