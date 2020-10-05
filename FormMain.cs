@@ -607,6 +607,10 @@ namespace TimedRemindTool
         /// <param name="filePath">输出文件路径</param>
         private void SaveTimedRemind(List<TimedRemind> trList, string filePath)
         {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
             if (trList.Count > 0)
             {
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
@@ -617,13 +621,6 @@ namespace TimedRemindTool
                         sw.WriteLine(item.ToString());
                     }
                     sw.Close();
-                }
-            }
-            else
-            {
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
                 }
             }
         }
