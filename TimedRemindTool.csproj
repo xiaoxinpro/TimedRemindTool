@@ -91,6 +91,7 @@
       <DependentUpon>FormRemind.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\IniFile.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimedRemind.cs" />
