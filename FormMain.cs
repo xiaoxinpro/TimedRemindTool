@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,7 +28,7 @@ namespace TimedRemindTool
         {
             argsCommand = args;
             InitializeComponent();
-            INIFILE.Config.Load();
+            Global.Init();
         }
 
         /// <summary>
@@ -37,6 +38,9 @@ namespace TimedRemindTool
         /// <param name="e"></param>
         private void FormMain_Load(object sender, EventArgs e)
         {
+            //加载配置文件
+            INIFILE.Config.Load();
+
             //初始化托盘图标
             InitNotifyIcon(notifyIconCtrl);
 
@@ -180,6 +184,11 @@ namespace TimedRemindTool
             listView.Columns.Add("剩余时间", 70, HorizontalAlignment.Center);
             listView.Columns.Add("循环方式", 70, HorizontalAlignment.Center);
             listView.Columns.Add("备注", 100, HorizontalAlignment.Center);
+
+            //创建列表内容
+            listView.BeginUpdate();
+            LoadTimedRemind(Global.BackupPath);
+            listView.EndUpdate();
         }
         #endregion
 
@@ -213,6 +222,7 @@ namespace TimedRemindTool
         public void CloseForm()
         {
             notifyIconCtrl.Visible = false;
+            SaveTimedRemind(listTimedRemind, Global.BackupPath);
             foreach (TimedRemind tr in listTimedRemind)
             {
                 tr.Stop();
@@ -394,7 +404,7 @@ namespace TimedRemindTool
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                callOnClick(buttonAdd);
+                CallOnClick(buttonAdd);
                 listViewTimed.Select();
             }
         }
@@ -494,11 +504,11 @@ namespace TimedRemindTool
         /// 添加定时
         /// </summary>
         /// <param name="tr"></param>
-        private bool AddTimedRemind(TimedRemind tr)
+        private bool AddTimedRemind(TimedRemind tr, bool isRun = true)
         {
             listTimedRemind.Add(tr);
             listTimedRemind[listTimedRemind.Count - 1].BindTimedDone(TimedRemindDone);
-            if (listTimedRemind[listTimedRemind.Count - 1].Start())
+            if (isRun == false || listTimedRemind[listTimedRemind.Count - 1].Start())
             {
                 AddListViewTimed(listViewTimed, listTimedRemind[listTimedRemind.Count - 1]);
                 //Task.Factory.StartNew(() =>
@@ -565,7 +575,7 @@ namespace TimedRemindTool
         /// 模拟按钮点击事件
         /// </summary>
         /// <param name="btn">按钮控件</param>
-        private void callOnClick(Button btn)
+        private void CallOnClick(Button btn)
         {
             //建立一个类型  
             Type t = typeof(Button);
@@ -578,6 +588,57 @@ namespace TimedRemindTool
             //调用  
             m.Invoke(btn, p);
             return;
+        }
+
+        /// <summary>
+        /// 保存定时任务数据
+        /// </summary>
+        /// <param name="trList">定时任务列表</param>
+        /// <param name="filePath">输出文件路径</param>
+        private void SaveTimedRemind(List<TimedRemind> trList, string filePath)
+        {
+            if (trList.Count > 0)
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+                {
+                    StreamWriter sw = new StreamWriter(fs);
+                    foreach (TimedRemind item in trList)
+                    {
+                        sw.WriteLine(item.ToString());
+                    }
+                    sw.Close();
+                }
+            }
+            else
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 加载任务定时文件
+        /// </summary>
+        /// <param name="filePath">加载文件路径</param>
+        private void LoadTimedRemind(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                using (FileStream fs= new FileStream(filePath,FileMode.Open))
+                {
+                    StreamReader sr = new StreamReader(fs);
+                    while (!sr.EndOfStream)
+                    {
+                        TimedRemind tr = new TimedRemind(sr.ReadLine());
+                        if (tr.Status == TimedRemind.EnmuTimedStatus.Run)
+                        {
+                            AddTimedRemind(tr, false);
+                        }
+                    }
+                }
+            }
         }
         #endregion
 
