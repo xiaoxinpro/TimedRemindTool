@@ -78,12 +78,7 @@ namespace INIFILE
         /// </summary>
         private static void Init()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TimedRemindTool";
-            if (Directory.Exists(path) == false)
-            {
-                Directory.CreateDirectory(path);
-            }
-            _file = new IniFile(path + "\\Config.ini");
+            _file = new IniFile(TimedRemindTool.Global.ConfigPath);
         }
 
         #endregion
