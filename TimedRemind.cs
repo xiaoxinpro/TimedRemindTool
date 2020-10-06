@@ -60,18 +60,26 @@ namespace TimedRemindTool
             string[] arr = tr.Split(new char[1] { '|'});
             if (arr.Length > 5)
             {
-                TimedMode = (EnmuTimedMode)Enum.Parse(typeof(EnmuTimedMode), arr[0], true);
-                TimeLoop = (EnmuTimeLoop)Enum.Parse(typeof(EnmuTimeLoop), arr[1], true);
-                TimeDate = Convert.ToDateTime(arr[2]);
-                Mark = arr[3];
-                DateTime dtStart = Convert.ToDateTime(arr[4]);
-                DateTime dtEnd = Convert.ToDateTime(arr[5]);
-                Status = EnmuTimedStatus.Ready;
-                if (e != null)
+                try
                 {
-                    BindTimedDone(e);
+                    TimedMode = (EnmuTimedMode)Enum.Parse(typeof(EnmuTimedMode), arr[0], true);
+                    TimeLoop = (EnmuTimeLoop)Enum.Parse(typeof(EnmuTimeLoop), arr[1], true);
+                    TimeDate = Convert.ToDateTime(arr[2]);
+                    Mark = arr[3];
+                    DateTime dtStart = Convert.ToDateTime(arr[4]);
+                    DateTime dtEnd = Convert.ToDateTime(arr[5]);
+                    Status = EnmuTimedStatus.Ready;
+                    if (e != null)
+                    {
+                        BindTimedDone(e);
+                    }
+                    Start(dtStart, dtEnd);
                 }
-                Start(dtStart, dtEnd);
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                    Status = EnmuTimedStatus.Done;
+                }
             }
             else
             {
