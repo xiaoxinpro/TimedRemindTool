@@ -64,6 +64,9 @@ namespace TimedRemindTool
 
             //初始化开机自启动
             checkBoxAutoRun.Checked = AutoRun.IsAutoRun();
+
+            //初始化未完成任务加载
+            checkBoxSave.Checked = Convert.ToBoolean(INIFILE.Config.IsSaveTimed);
         }
 
         /// <summary>
