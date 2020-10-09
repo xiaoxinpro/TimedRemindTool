@@ -195,10 +195,12 @@ namespace TimedRemindTool
         /// <param name="listView"></param>
         private void LoadListViewTimed(ListView listView, string path)
         {
-            //加载列表内容
-            listView.BeginUpdate();
-            LoadTimedRemind(path);
-            listView.EndUpdate();
+            if (INIFILE.Config.IsSaveTimed)
+            {
+                listView.BeginUpdate();
+                LoadTimedRemind(path);
+                listView.EndUpdate();
+            }
         }
         #endregion
 
