@@ -97,7 +97,20 @@ namespace TimedRemindTool
         public bool Start()
         {
             DateTime now = DateTime.Now;
-            return Start(now, GetEndTime(TimeDate, now));
+            bool ret;
+            switch (TimedMode)
+            {
+                case EnmuTimedMode.Timekeep:
+                    ret = Start(now, GetEndTime(TimeDate, now));
+                    break;
+                case EnmuTimedMode.Timed:
+                    ret = Start(now, TimeDate);
+                    break;
+                default:
+                    ret = false;
+                    break;
+            }
+            return ret;
         }
 
         /// <summary>
