@@ -352,6 +352,10 @@ namespace TimedRemindTool
                     }
                     else
                     {
+                        if (Convert.ToInt32(listView.Items[i].Text) - 1 != i)
+                        {
+                            listView.Items[i].Text = (i + 1).ToString();
+                        }
                         UpdataListViewItem(listView.Items[i], trs[i]);
                     }
                 }
@@ -562,20 +566,22 @@ namespace TimedRemindTool
         #region 定时事件
         private void TimedRemindDone(object sender)
         {
-            TimedRemind tm = (TimedRemind)sender;
-            this.Invoke(new Action(() =>
+            try
             {
-                try
+                TimedRemind tm = (TimedRemind)sender;
+                this.Invoke(new Action(() =>
                 {
+
                     ShowForm(this.notifyIconCtrl);
                     Form formMessage = new FormRemind(tm.Mark);
                     formMessage.Show();
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine(err.Message);
-                }
-            }));
+
+                }));
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err.Message);
+            }
         }
 
 
