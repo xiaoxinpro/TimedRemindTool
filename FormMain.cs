@@ -213,8 +213,8 @@ namespace TimedRemindTool
         {
             this.Show();
             this.WindowState = FormWindowState.Normal;
-            //notifyIcon.Visible = false;
             this.ShowInTaskbar = true;
+            SetVisibleCore(true);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace TimedRemindTool
         {
             this.Hide();
             this.ShowInTaskbar = false;
-            //notifyIcon.Visible = true;
+            SetVisibleCore(false);
         }
 
         /// <summary>
@@ -588,6 +588,15 @@ namespace TimedRemindTool
         #endregion
 
         #region 私有函数
+
+        /// <summary>
+        /// ALT+TAB窗体显示/隐藏
+        /// </summary>
+        /// <param name="value">true显示，false隐藏</param>
+        protected override void SetVisibleCore(bool value)
+        {
+            base.SetVisibleCore(value);
+        }
 
         /// <summary>
         /// 模拟按钮点击事件
