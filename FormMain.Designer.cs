@@ -74,6 +74,8 @@
             // 
             // comboBoxLoop
             // 
+            this.comboBoxLoop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxLoop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLoop.FormattingEnabled = true;
             this.comboBoxLoop.Items.AddRange(new object[] {
@@ -86,6 +88,8 @@
             // 
             // textBoxMark
             // 
+            this.textBoxMark.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMark.Font = new System.Drawing.Font("宋体", 10.5F);
             this.textBoxMark.Location = new System.Drawing.Point(187, 42);
             this.textBoxMark.Name = "textBoxMark";
@@ -113,6 +117,7 @@
             // 
             // buttonAdd
             // 
+            this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAdd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonAdd.Location = new System.Drawing.Point(348, 19);
             this.buttonAdd.Name = "buttonAdd";
