@@ -87,6 +87,7 @@ namespace TimedRemindTool
             {
                 ShowForm((NotifyIcon)sender);
             }
+            this.Activate();
         }
 
         /// <summary>
