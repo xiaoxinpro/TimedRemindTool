@@ -164,6 +164,7 @@
             this.dateTimeCtrl.Size = new System.Drawing.Size(100, 23);
             this.dateTimeCtrl.TabIndex = 1;
             this.dateTimeCtrl.Value = new System.DateTime(2020, 5, 22, 1, 0, 0, 0);
+            this.dateTimeCtrl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMark_KeyPress);
             // 
             // groupBoxTimdeLIst
             // 
