@@ -421,8 +421,15 @@ namespace TimedRemindTool
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                CallOnClick(buttonAdd);
-                listViewTimed.Select();
+                if (sender.GetType().Name == "DateTimePicker" && textBoxMark.Text == string.Empty)
+                {
+                    textBoxMark.Select();
+                }
+                else
+                {
+                    CallOnClick(buttonAdd);
+                    listViewTimed.Select();
+                }
             }
         }
 
