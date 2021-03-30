@@ -427,6 +427,7 @@ namespace TimedRemindTool
                 }
                 else
                 {
+                    buttonAdd.Focus();
                     CallOnClick(buttonAdd);
                     listViewTimed.Select();
                 }
